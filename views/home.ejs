@@ -1,0 +1,25 @@
+<%- include('header.ejs') %>
+    <main>
+        <h1>Rio Abaixo/Rio Acima</h1>
+        <div>
+            <form class="pure-form pure-form-aligned">
+                <fieldset>
+                    <div class="pure-control-group">
+                        <label for="txtAddJogador">Nome do Jogador: </label>
+                        <input type="text" id="txtAddJogador" class="pure-u-1-4" />
+                        <button class="pure-button pure-button-primary" id="addJogador">Adicionar Jogador</button>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+
+
+    </main>
+
+    <script>
+        document.querySelector('#addJogador').addEventListener('click', function (event) {
+
+        })
+    </script>
+
+    <%- include('footer.ejs') %>
