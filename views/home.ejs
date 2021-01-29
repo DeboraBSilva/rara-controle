@@ -2,38 +2,45 @@
     <main>
         <h1>Rio Abaixo/Rio Acima</h1>
         <div>
-            <form class="pure-form pure-form-aligned">
+            <form action='/home' method='post' class="pure-form pure-form-aligned">
                 <fieldset>
                     <div class="pure-control-group">
                         <label for="txtAddJogador">Nome do Jogador: </label>
-                        <input type="text" id="txtAddJogador" class="pure-u-1-4" />
+                        <input name="jogador" type="text" id="txtAddJogador" class="pure-u-1-4" />
                     </div>
                 </fieldset>
+                <button type="submit" class="pure-button pure-button-primary" id="btnAddJogador">Adicionar
+                    Jogador</button>
             </form>
-
-            <button class="pure-button pure-button-primary" id="btnAddJogador" onclick="addJogador()">Adicionar
-                Jogador</button>
-            <table class="pure-table" style="margin: 1vh auto;">
-                <thead>
-                    <tr>
-                        <th>Selecione</th>
-                        <th>Mesa</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <ul>
-                            <td id="listaNomes">
-                            </td>
-                        </ul>
-
-                        <ul>
-                            <td id="listaJogadores">
-                            </td>
-                        </ul>
-                    </tr>
-                </tbody>
-            </table>
+            <div style="display: flex; ">
+                <table class="pure-table" style="margin: 1vh auto;">
+                    <thead>
+                        <tr>
+                            <th>Selecione</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% nomes.forEach(usuario=> { %>
+                            <tr>
+                                <td id="nome">
+                                    <%= usuario.nome %>
+                                </td>
+                            </tr>
+                            <% }) %>
+                    </tbody>
+                </table>
+                <table class="pure-table" style="margin: 5vh auto;">
+                    <thead>
+                        <tr>
+                            <th>Mesa</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr id="jogadores">
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </main>
 

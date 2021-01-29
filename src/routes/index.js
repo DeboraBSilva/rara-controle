@@ -1,8 +1,16 @@
 const express = require('express')
 const router = express.Router()
 
-const home = require('../controllers/home')
+const homeController = require('../controllers/home')
 
-router.get('/', home.home)
+const loginController = require('../controllers/login')
+
+router.get('/', loginController.validar)
+
+router.get('/home', homeController.home)
+
+router.post('/home', homeController.incluir)
+
+router.post('/login', loginController.validar)
 
 module.exports = router

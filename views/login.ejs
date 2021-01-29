@@ -1,0 +1,13 @@
+<%- include('header.ejs') %>
+
+    <div class='container center entrada'>
+        <span style='padding: 10px' class="pure-menu-heading">Digite a senha para continuar</span>
+        <form action='/login' method='post' class="pure-form pure-form-stacked">
+            <div>
+                <input name='password' type="password" id="stacked-password" placeholder="Password" />
+            </div>
+            <button type="submit" class="pure-button">Enviar</button>
+        </form>
+    </div>
+
+    <%- include('footer.ejs') %>
