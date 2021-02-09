@@ -4,17 +4,10 @@
 }
 
 main {
-    margin: 10vh auto;
+    margin: 10vh 10px;
     text-align: center;
 }
 
-ul{
-    list-style-type: none;
-}
-
-li{
-    font-size: large;
-    margin: 3vh auto ;
-    list-style-type: none;
-
+.tab {
+    display: none;
 }

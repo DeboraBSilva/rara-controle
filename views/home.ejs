@@ -6,12 +6,13 @@
                 <fieldset>
                     <div class="pure-control-group">
                         <label for="txtAddJogador">Nome do Jogador: </label>
-                        <input name="jogador" type="text" id="txtAddJogador" class="pure-u-1-4" />
+                        <input name="jogador" type="text" id="txtAddJogador" class="pure-u-sm-1-4" required />
                     </div>
                 </fieldset>
                 <button type="submit" class="pure-button pure-button-primary" id="btnAddJogador">Adicionar
                     Jogador</button>
             </form>
+            <button class="pure-button pure-button-primary" id="btnIniciarJogo" style="margin: 5vh auto;">Iniciar Jogo</button>
             <div style="display: flex; ">
                 <table class="pure-table" style="margin: 1vh auto;">
                     <thead>
@@ -22,7 +23,7 @@
                     <tbody>
                         <% nomes.forEach(usuario=> { %>
                             <tr>
-                                <td id="nome">
+                                <td class="tdNome">
                                     <%= usuario.nome %>
                                 </td>
                             </tr>
@@ -35,9 +36,8 @@
                             <th>Mesa</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr id="jogadores">
-                        </tr>
+                    <tbody id="jogadores">
+
                     </tbody>
                 </table>
             </div>

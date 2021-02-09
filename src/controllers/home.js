@@ -8,8 +8,7 @@ const knex = require('knex')({
     }
 });
 
-exports.home = (req, res) => {
-
+exports.getListaJogadores = (req, res) => {
     knex.select('id', 'nome').from('jogadores').orderBy('nome')
         .then((nomes) => {
             res.render('home', {
@@ -21,13 +20,12 @@ exports.home = (req, res) => {
         })
 }
 
-exports.incluir = async (req, res) => {
-    console.log(req.body.jogador)
+exports.incluirJogador = async (req, res) => {
     const id = await knex('jogadores').insert({
         nome: req.body.jogador
     })
     if (id > 0) {
-        res.render('home')
+        this.getListaJogadores(req,res)
     } else {
         res.send('Problemas na inclusão')
     }
