@@ -15,6 +15,6 @@ router.post('/home', homeController.incluirJogador)
 
 router.post('/login', loginController.validar)
 
-router.get('/partida', partidaController.showTab)
+router.get('/partida', partidaController.partida)
 
 module.exports = router
