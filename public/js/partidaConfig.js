@@ -1,54 +1,92 @@
-let currentTab = 0 // Current tab is set to be the first tab (0)
-// this.showTab(currentTab) // Display the current tab
+let contadorColuna = 1
+let apostaResultado = 'aposta'
+let vez = 0
 
-const showTab = (n) => {
-    // This function will display the specified tab of the form ...
-    var x = document.getElementsByClassName("tab")
-    x[n].style.display = "block"
-    if (n == (x.length - 1)) {
-        document.getElementById("nextBtn").innerHTML = "Submit"
+const btnEnviaDados = document.getElementById('enviaDados')
+
+const calculaPontos = (aposta, resultado) => {
+    if (aposta == resultado) {
+        if (contadorColuna == 20 || contadorColuna == 23) {
+            if (aposta == 1) {
+                pontos = 25
+            } else {
+                pontos = 10
+            }
+        } else {
+            pontos = resultado + (aposta == 0 ? 10 : aposta * 10)
+        }
     } else {
-        document.getElementById("nextBtn").innerHTML = "Next"
+        pontos = resultado
     }
+    return pontos
 }
 
-const nextPrev = (n) => {
-    // This function will figure out which tab to display
-    var x = document.getElementsByClassName("tab")
-    // Exit the function if any field in the current tab is invalid:
-    if (n == 1 && !validateForm()) return false
-    // Hide the current tab:
-    x[currentTab].style.display = "none"
-    // Increase or decrease the current tab by 1:
-    currentTab = currentTab + n
-    // if you have reached the end of the form... :
-    if (currentTab >= x.length) {
-        //...the form gets submitted:
-        document.getElementById("regForm").submit()
-        return false
-    }
-    // Otherwise, display the correct tab:
-    showTab(currentTab)
-}
-
-const validateForm = () => {
-    // This function deals with validation of the form fields
-    var x, y, i, valid = true
-    x = document.getElementsByClassName("tab")
-    y = x[currentTab].getElementsByTagName("input")
-    // A loop that checks every input field in the current tab:
-    for (i = 0; i < y.length; i++) {
-        // If a field is empty...
-        if (y[i].value == "") {
-            // add an "invalid" class to the field:
-            y[i].className += " invalid"
-            // and set the current valid status to false:
-            valid = false
+const enviaDados = () => {
+    let tmp = vez
+    let cont = 0
+    if (apostaResultado == 'aposta') {
+        let totalAposta = 0
+        while (cont < conteudo.length) {
+            let aposta = parseInt(prompt('Qual é a aposta de ' + conteudo[tmp][0]));
+            totalAposta += aposta
+            conteudo[tmp][contadorColuna] = aposta
+            tmp++
+            if (tmp >= conteudo.length) {
+                tmp = 0
+            }
+            cont++
+        }
+        contadorColuna++
+        apostaResultado = 'resultado'
+        btnEnviaDados.innerHTML = 'Envia Resultado'
+    } else {
+        while (cont < conteudo.length) {
+            let resultado = parseInt(prompt('Qual é o resultado de ' + conteudo[tmp][0]));
+            conteudo[tmp][contadorColuna] = resultado
+            let pontos = calculaPontos(conteudo[tmp][contadorColuna - 1], resultado)
+            conteudo[tmp][contadorColuna + 1] = pontos
+            conteudo[tmp][43] = pontos + parseInt('0' + conteudo[tmp][43])
+            tmp++
+            if (tmp >= conteudo.length) {
+                tmp = 0
+            }
+            cont++
+        }
+        contadorColuna++
+        if (contadorColuna % 3 == 0) {
+            contadorColuna++
+        }
+        apostaResultado = 'aposta'
+        btnEnviaDados.innerHTML = 'Envia Aposta'
+        vez++
+        if (vez >= conteudo.length) {
+            vez = 0
         }
     }
-    // If the valid status is true, mark the step as finished and valid:
-    if (valid) {
-        document.getElementsByClassName("step")[currentTab].className += " finish"
-    }
-    return valid // return the valid status
+    gerarTabela(conteudo)
 }
+
+const gerarTabela = (conteudo) => {
+    const tabelaJogo = document.getElementById('tabelaJogo')
+    var tableHeaderRowCount = 2;
+    var rowCount = tabelaJogo.rows.length;
+    for (var i = tableHeaderRowCount; i < rowCount; i++) {
+        tabelaJogo.deleteRow(tableHeaderRowCount);
+    }
+
+    for (let i = 0; i < conteudo.length; i++) {
+        const tr = document.createElement('tr')
+        tr.className = 'linhaJogador'
+        for (let o = 0; o < conteudo[i].length; o++) {
+            const td = document.createElement('td');
+            if (o == 0 || o == conteudo[i].length - 1) {
+                td.className = 'colunaFixa'
+            }
+            let texto = document.createTextNode(conteudo[i][o]);
+            td.appendChild(texto);
+            tr.appendChild(td);
+        }
+        tabelaJogo.appendChild(tr);
+    }
+}
+

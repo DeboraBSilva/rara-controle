@@ -8,6 +8,8 @@ main {
     text-align: center;
 }
 
-.tab {
-    display: none;
+th.colunaFixa, td.colunaFixa {
+    position: sticky;
+    left: 0px;
+    background-color: grey;
 }

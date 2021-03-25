@@ -2,7 +2,7 @@
     <main>
         <h1>Rio Abaixo/Rio Acima</h1>
         <div>
-            <form action='/home' method='post' class="pure-form pure-form-aligned">
+            <form action="/home" method="post" class="pure-form pure-form-aligned">
                 <fieldset>
                     <div class="pure-control-group">
                         <label for="txtAddJogador">Nome do Jogador: </label>
@@ -12,8 +12,14 @@
                 <button type="submit" class="pure-button pure-button-primary" id="btnAddJogador">Adicionar
                     Jogador</button>
             </form>
-            <a href="/partida"><button class="pure-button pure-button-primary" id="btnIniciarJogo"
-                    style="margin: 5vh auto;">Iniciar Jogo</button></a>
+            <form style="padding: 5px; margin: 5px" class="pure-form" action="/partida" method="post"
+                onsubmit="enviar();">
+                <input type="hidden" name="mesaJogadores" id="mesaJogadores" />
+                <button class="pure-button pure-button-primary" id="btnIniciarJogo" type="submit"
+                    style="margin: 5vh auto;">Iniciar
+                    Jogo</button>
+            </form>
+
             <div style="display: flex; ">
                 <table class="pure-table" style="margin: 1vh auto;">
                     <thead>
@@ -45,6 +51,9 @@
         </div>
     </main>
 
+    </div>
+
     <script type="text/javascript" src="./js/jogadoresConfig.js"></script>
+
 
     <%- include('footer.ejs') %>
