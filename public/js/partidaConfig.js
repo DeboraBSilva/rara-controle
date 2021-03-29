@@ -20,6 +20,7 @@ const colunasAposta = [
 
 const btnEnviaDados = document.getElementById('enviaDados')
 
+// Define qual é a mão atual e retorna false se o total de apostas é invalido para aquela mão
 const verificaMao = (coluna, aposta, totalAposta) => {
     let mao
     colunasAposta.forEach((item) => {
@@ -51,6 +52,7 @@ const calculaPontos = (aposta, resultado) => {
     return pontos
 }
 
+// Envia dados de aposta e de resultados dependendo da coluna que os dados serão inseridos
 const enviaDados = () => {
     let tmp = vez
     let cont = 0
@@ -89,7 +91,6 @@ const enviaDados = () => {
             conteudo[tmp][contadorColuna] = resultado
             let pontos = calculaPontos(conteudo[tmp][contadorColuna - 1], resultado)
             conteudo[tmp][contadorColuna + 1] = pontos
-            // conteudo[tmp][43] = pontos + parseInt('0' + conteudo[tmp][43])
             tmp++
             if (tmp >= conteudo.length) {
                 tmp = 0
@@ -107,9 +108,10 @@ const enviaDados = () => {
             vez = 0
         }
     }
-    gerarTabela(conteudo)
+    geraTabela(conteudo)
 }
 
+// Calcula o total de pontos de cada linha e modifica o ultimo item
 const totaliza = () => {
     let coluna = 3
     for (let i = 0; i < conteudo.length; i++) {
@@ -121,7 +123,7 @@ const totaliza = () => {
     }
 }
 
-const gerarTabela = (conteudo) => {
+const geraTabela = (conteudo) => {
     totaliza()
     const tabelaJogo = document.getElementById('tabelaJogo')
     var tableHeaderRowCount = 2
@@ -146,17 +148,17 @@ const gerarTabela = (conteudo) => {
                         }
                     })
                     if (isAposta) {
-                        let correcao = parseInt(prompt('Correção'))
+                        let correcao = parseInt(prompt('Correção Aposta'))
                         conteudo[i][o] = correcao
                         let pontos = calculaPontos(conteudo[i][o], conteudo[i][o + 1])
                         conteudo[i][o + 2] = pontos
                     } else {
-                        let correcao = parseInt(prompt('Correção'))
+                        let correcao = parseInt(prompt('Correção Resultado'))
                         conteudo[i][o] = correcao
                         let pontos = calculaPontos(conteudo[i][o - 1], conteudo[i][o])
                         conteudo[i][o + 1] = pontos
                     }
-                    gerarTabela(conteudo)
+                    geraTabela(conteudo)
                 })
             }
             let texto = document.createTextNode(conteudo[i][o])
